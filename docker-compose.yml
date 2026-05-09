@@ -1,0 +1,17 @@
+services:
+  nginx:
+    image: nginx:1.27-alpine
+    container_name: sandbox-nginx
+    restart: unless-stopped
+    ports:
+      - "${NGINX_HTTP_PORT:-8080}:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./logs/nginx:/var/log/nginx
+    networks:
+      - sandbox-control
+
+networks:
+  sandbox-control:
+    name: sandbox-control
