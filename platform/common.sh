@@ -43,7 +43,7 @@ reload_nginx() {
 }
 
 random_suffix() {
-    tr -dc 'a-z0-9' </dev/urandom | head -c 6
+    cat /proc/sys/kernel/random/uuid | tr -d '-' | cut -c1-6
 }
 
 read_json_field() {
