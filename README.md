@@ -28,7 +28,7 @@ A self-service sandbox platform that creates short-lived app environments behind
                    +--------- per-env docker net ----------+
 
 Host processes:
-- platform/api.py           (Flask Control API)
+- platform/api.py           (Control API)
 - monitor/health_poller.py  (health checks every 30s)
 - platform/cleanup_daemon.sh (TTL cleanup every 60s)
 
@@ -43,7 +43,7 @@ Runtime data:
 - Docker + Docker Compose
 - Nginx (containerized)
 - Bash scripts for lifecycle and outage simulation
-- Python 3 (Flask API + health poller)
+- Python 3 (stdlib API + health poller)
 
 ## Repo Layout
 
@@ -62,7 +62,7 @@ devops-sandbox/
 ## Prerequisites
 
 - Linux VM with Docker + Docker Compose plugin
-- Python 3.10+ with `venv`
+- Python 3.10+
 - `make`
 
 ## Quick Start (Under 5 Commands)

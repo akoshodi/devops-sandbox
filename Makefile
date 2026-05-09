@@ -16,13 +16,11 @@ up:
 	@cp -n .env.example .env >/dev/null 2>&1 || true
 	@docker compose up -d nginx
 	@docker build -t sandbox-demo-app:latest demo-app >/dev/null
-	@python3 -m venv .venv
-	@.venv/bin/pip install --quiet -r requirements.txt
 	@-if [ -f envs/api.pid ]; then kill $$(cat envs/api.pid) >/dev/null 2>&1 || true; fi
 	@-if [ -f envs/health_poller.pid ]; then kill $$(cat envs/health_poller.pid) >/dev/null 2>&1 || true; fi
 	@-if [ -f envs/cleanup_daemon.pid ]; then kill $$(cat envs/cleanup_daemon.pid) >/dev/null 2>&1 || true; fi
-	@nohup .venv/bin/python platform/api.py >> logs/api.log 2>&1 & echo $$! > envs/api.pid
-	@nohup .venv/bin/python monitor/health_poller.py >> logs/health_poller.log 2>&1 & echo $$! > envs/health_poller.pid
+	@nohup python3 platform/api.py >> logs/api.log 2>&1 & echo $$! > envs/api.pid
+	@nohup python3 monitor/health_poller.py >> logs/health_poller.log 2>&1 & echo $$! > envs/health_poller.pid
 	@nohup bash platform/cleanup_daemon.sh >> logs/cleanup_daemon.log 2>&1 & echo $$! > envs/cleanup_daemon.pid
 	@echo "Platform started: nginx + api + health poller + cleanup daemon"
 
