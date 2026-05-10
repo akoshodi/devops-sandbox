@@ -47,8 +47,7 @@ logs:
 	@tail -n 100 "logs/$(ENV)/app.log"
 
 health:
-	@python3 -c 'import glob, json, time; files=sorted(glob.glob("envs/env-*.json"));\
-[print(f"{s['"'"'id'"'"']} status={s['"'"'status'"'"']} ttl_remaining={max(0, s['"'"'created_at_epoch'"'"']+s['"'"'ttl_seconds'"'"']-int(time.time()))}s") for s in [json.load(open(p, "r", encoding="utf-8")) for p in files]]'
+	@python3 platform/health_check.py
 
 simulate:
 	@if [ -z "$(ENV)" ] || [ -z "$(MODE)" ]; then echo "Usage: make simulate ENV=env-abc123 MODE=crash"; exit 1; fi
