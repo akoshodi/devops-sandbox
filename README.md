@@ -73,6 +73,10 @@ devops-sandbox/
 4. Open printed env URL in browser
 5. `curl http://localhost:5000/envs`
 
+## Installation & Deployment
+
+For **detailed setup on Ubuntu** including prerequisites, systemd integration, reverse proxy, and troubleshooting, see [DEPLOYMENT.md](DEPLOYMENT.md).
+
 ## Environment Lifecycle
 
 ### Create
